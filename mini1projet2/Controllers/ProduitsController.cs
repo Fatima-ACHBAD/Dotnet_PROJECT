@@ -42,7 +42,13 @@ namespace mini1projet2.Controllers
 
             return View(produit);
         }
-       
+        public void ADD(int id)
+        {
+            //return _context.Produit.Any(e => e.ProduitID == id);
+
+            _context.LignePanier.Add(new LignePanier { Quantite = 100, PanierID = 1, ProduitID = id });
+            _context.SaveChanges();
+        }
         // GET: Produits/Create
         public IActionResult Create()
         {
