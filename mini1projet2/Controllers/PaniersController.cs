@@ -34,6 +34,9 @@ namespace mini1projet2.Controllers
             }
 
             var panier = await _context.Panier
+                //quest:9
+               // .Include(p => p.LignePanier)
+               // .ThenInclude(lp => lp.Produit)
                 .FirstOrDefaultAsync(m => m.PanierID == id);
             if (panier == null)
             {

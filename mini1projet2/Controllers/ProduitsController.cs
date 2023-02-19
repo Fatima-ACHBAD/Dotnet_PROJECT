@@ -24,7 +24,13 @@ namespace mini1projet2.Controllers
         {
               return View(await _context.Produit.ToListAsync());
         }
+        public void AddItemToShoppingCart(int id)
+        {
+            //return _context.Produit.Any(e => e.ProduitID == id);
 
+            _context.LignePanier.Add(new LignePanier { Quantite = 100, PanierID = 1, ProduitID = id });
+            _context.SaveChanges();
+        }
         // GET: Produits/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,13 +48,7 @@ namespace mini1projet2.Controllers
 
             return View(produit);
         }
-        public void ADD(int id)
-        {
-            //return _context.Produit.Any(e => e.ProduitID == id);
 
-            _context.LignePanier.Add(new LignePanier { Quantite = 100, PanierID = 1, ProduitID = id });
-            _context.SaveChanges();
-        }
         // GET: Produits/Create
         public IActionResult Create()
         {
@@ -161,10 +161,7 @@ namespace mini1projet2.Controllers
 
         private bool ProduitExists(int id)
         {
-
           return _context.Produit.Any(e => e.ProduitID == id);
         }
-       
     }
-   
 }

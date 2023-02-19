@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mini1projet2.Data;
 
@@ -11,9 +12,10 @@ using mini1projet2.Data;
 namespace mini1projet2.Migrations
 {
     [DbContext(typeof(mini1projet2Context))]
-    partial class mini1projet2ContextModelSnapshot : ModelSnapshot
+    [Migration("20230219135052_Initialmig")]
+    partial class Initialmig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

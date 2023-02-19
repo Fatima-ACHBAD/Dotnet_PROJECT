@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<mini1projet2.Models.Produit>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "List of produits";
 }
 
 <h1>Index</h1>
@@ -9,34 +9,53 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProduitID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProduitID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProduitID">Delete</a>
-                 <a asp-action="ADD" asp-route-id="@item.ProduitID">AJOUTERITEM</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info">
+                            <p class="card-text">
+                                <h5 class="card-title ">
+                                    @item.Nom
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text"><b>Prix: </b>@item.Price</p>
+                            <p class="card-text ">
+                                <b>Status: AVAILABLE </b>
+                                @if (DateTime.Now == DateTime.Now )
+                                {
+                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                }
+                               
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.ProduitID">
+                                    <i class="bi bi-eye-fill"></i> Show Details
+                                </a>
+                                <a class="btn btn-success text-white @((DateTime.Now > DateTime.Now) ? "disabled" : "")"
+                               asp-controller="Produits"
+                               asp-action="AddItemToShoppingCart"
+                               asp-route-id="@item.ProduitID">
+                                    <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price)
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
